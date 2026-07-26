@@ -1,0 +1,28 @@
+name: .Net CI
+
+on:
+  push:
+    branch:[main]
+  pull_request:
+    branch:[main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - user: actions/checkout@v6
+
+      - name: Setup .Net
+        users: actions/setup-dotnet@v4
+        with: 
+          dotnet-version:'6.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet Restore
+
+      - name: build
+        run: dotnet build --configuration Release --no-Restore
+
+      - name: test
+        run: dotnet test --no-restore --verbosity normal
