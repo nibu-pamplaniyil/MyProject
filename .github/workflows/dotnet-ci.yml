@@ -2,21 +2,21 @@ name: .Net CI
 
 on:
   push:
-    branch:[main]
+    branches: [main]
   pull_request:
-    branch:[main]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - user: actions/checkout@v6
+      - uses: actions/checkout@v6
 
       - name: Setup .Net
-        users: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v4
         with: 
-          dotnet-version:'6.0.x'
+          dotnet-version: '6.0.x'
 
       - name: Restore Dependencies
         run: dotnet Restore
